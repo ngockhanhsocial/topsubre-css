@@ -1,0 +1,271 @@
+/* ==========================
+   TOPSUBRE PREMIUM UI V2
+   ========================== */
+
+:root{
+    --primary:#5865f2;
+    --success:#00c17c;
+    --danger:#ff4d6d;
+    --warning:#ffb020;
+    --dark:#1e293b;
+    --light:#ffffff;
+    --border:#e5e7eb;
+    --bg:#f8fafc;
+}
+
+body{
+    background:#f4f7fc;
+}
+
+/* FORM CHUNG */
+
+.card,
+.service-card,
+.panel{
+    border:none!important;
+    border-radius:16px!important;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.08)!important;
+    background:#fff;
+}
+
+/* KHUNG THÔNG TIN SERVER */
+
+.alert-info,
+.server-description,
+.server-info{
+    background:linear-gradient(135deg,#dff7ff,#f2fdff)!important;
+    border:1px solid #8ee4ff!important;
+    border-left:5px solid var(--primary)!important;
+    border-radius:14px!important;
+    padding:16px 18px!important;
+    color:#334155!important;
+    font-size:14px;
+    line-height:1.7;
+    box-shadow:0 6px 20px rgba(0,0,0,.05);
+}
+
+/* RADIO SERVER */
+
+input[type="radio"]{
+    transform:scale(1.15);
+}
+
+.server-item{
+    padding:14px;
+    border-radius:12px;
+    transition:.3s;
+}
+
+.server-item:hover{
+    background:#f7f9ff;
+}
+
+/* BADGE HOẠT ĐỘNG */
+
+.label-success,
+.badge-success{
+    background:linear-gradient(135deg,#00c17c,#00e599)!important;
+    color:#fff!important;
+    border-radius:8px;
+    padding:4px 10px;
+    font-weight:600;
+}
+
+/* INPUT */
+
+input,
+textarea,
+select{
+    border-radius:12px!important;
+    border:1px solid #dbe3ee!important;
+    min-height:50px!important;
+    box-shadow:none!important;
+    transition:.3s;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:var(--primary)!important;
+    box-shadow:0 0 0 4px rgba(88,101,242,.12)!important;
+}
+
+/* LABEL */
+
+label{
+    font-weight:600;
+    color:#334155;
+    margin-bottom:8px;
+}
+
+/* KHU VỰC GIÁ */
+
+.price-box{
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    border-radius:14px;
+    padding:15px;
+}
+
+.price-box .price{
+    color:#ef4444;
+    font-weight:700;
+    font-size:18px;
+}
+
+/* TỔNG GIÁ */
+
+.total-price,
+.order-total{
+    background:linear-gradient(135deg,#5865f2,#7c8cff);
+    color:#fff!important;
+    border-radius:14px;
+    padding:14px;
+    font-size:18px;
+    font-weight:700;
+    text-align:center;
+    box-shadow:0 10px 20px rgba(88,101,242,.25);
+}
+
+/* NÚT MUA */
+
+.btn-success,
+.btn-primary,
+button[type="submit"]{
+    background:linear-gradient(135deg,#00c17c,#00e599)!important;
+    border:none!important;
+    min-height:52px;
+    padding:0 30px!important;
+    border-radius:12px!important;
+    font-size:16px!important;
+    font-weight:700!important;
+    box-shadow:0 10px 20px rgba(0,193,124,.25);
+    transition:.3s;
+}
+
+.btn-success:hover,
+.btn-primary:hover,
+button[type="submit"]:hover{
+    transform:translateY(-2px);
+}
+
+/* NÚT QUẢN LÝ ID */
+
+.btn-danger{
+    background:linear-gradient(135deg,#ff4d6d,#ff758f)!important;
+    border:none!important;
+    border-radius:12px!important;
+    font-weight:700!important;
+}
+
+/* REACTION ICON */
+
+.reaction-item img,
+.emotion-item img{
+    transition:.3s;
+}
+
+.reaction-item:hover img,
+.emotion-item:hover img{
+    transform:scale(1.15);
+}
+
+/* KHUNG VIDEO */
+
+.video-box iframe,
+iframe{
+    border-radius:16px!important;
+    overflow:hidden;
+}
+
+/* GHI CHÚ */
+
+.note-box,
+.notice-box{
+    background:#fffdf6;
+    border-left:4px solid var(--warning);
+    border-radius:12px;
+    padding:15px;
+}
+
+/* ==========================
+   TRANG NẠP TIỀN
+   ========================== */
+
+.deposit-card{
+    background:#fff;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 10px 35px rgba(0,0,0,.08);
+}
+
+.deposit-title{
+    font-size:24px;
+    font-weight:700;
+    color:#0f172a;
+}
+
+.deposit-content{
+    background:linear-gradient(135deg,#00c17c,#1fd49f);
+    color:#fff;
+    border-radius:14px;
+    padding:16px;
+    text-align:center;
+    font-size:22px;
+    font-weight:700;
+}
+
+.qr-box{
+    background:#fff;
+    border-radius:18px;
+    padding:20px;
+    text-align:center;
+    border:1px solid #eef2f7;
+}
+
+.bank-info{
+    padding:20px;
+    border-radius:16px;
+    background:#f8fafc;
+}
+
+/* BẢNG ƯU ĐÃI */
+
+.table{
+    border-radius:16px;
+    overflow:hidden;
+}
+
+.table th{
+    background:#5865f2;
+    color:#fff;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .card,
+    .panel{
+        border-radius:12px!important;
+    }
+
+    .btn-success,
+    .btn-primary{
+        width:100%;
+    }
+
+    .deposit-content{
+        font-size:18px;
+    }
+
+    .total-price{
+        font-size:16px;
+    }
+
+    iframe{
+        height:220px!important;
+    }
+
+}
