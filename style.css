@@ -1,271 +1,353 @@
-/* ==========================
-   TOPSUBRE PREMIUM UI V2
-   ========================== */
+/* =====================================================================
+   TOPSUBRE.COM — CUSTOM CSS
+   Làm đẹp: (1) Mô tả gói server, (2) Khu vực Mua dịch vụ
+            (Số lượng / Giá tiền / Tổng Giá / nút Mua),
+            (3) Trang Nạp Tiền
+   Dán toàn bộ đoạn này vào ô "Custom CSS" trong phần cấu hình hệ thống.
+   Bọc trong .view-user => CSS chỉ áp dụng cho giao diện người dùng,
+   không ảnh hưởng tới trang Admin.
+   ===================================================================== */
 
-:root{
-    --primary:#5865f2;
-    --success:#00c17c;
-    --danger:#ff4d6d;
-    --warning:#ffb020;
-    --dark:#1e293b;
-    --light:#ffffff;
-    --border:#e5e7eb;
-    --bg:#f8fafc;
+.view-user {
+  --ts-purple: #3a1f66;
+  --ts-purple-light: #f4f1fb;
+  --ts-pink: #ec4899;
+  --ts-teal: #0d9488;
+  --ts-teal-bg: #e3f9f6;
+  --ts-teal-bg-2: #d0f3ee;
+  --ts-green: #16a34a;
+  --ts-text: #232336;
+  --ts-text-soft: #6b7280;
+  --ts-border: #e7e3f1;
+  --ts-radius: 14px;
+  --ts-shadow: 0 6px 20px rgba(58, 31, 102, 0.08);
 }
 
-body{
-    background:#f4f7fc;
+/* =====================================================================
+   1) MÔ TẢ GÓI SERVER (khung màu xanh ngọc hiện ra khi chọn server)
+   Bootstrap thường dùng .alert/.alert-info, hoặc panel này có thể dùng
+   class riêng có chứa "info"/"note"/"detail" — selector dưới đây bắt
+   hết các khả năng phổ biến.
+   ===================================================================== */
+.view-user .alert-info,
+.view-user div[class*="server-info"],
+.view-user div[class*="package-note"],
+.view-user div[class*="server-note"],
+.view-user div[class*="goi-note"] {
+  position: relative;
+  background: linear-gradient(135deg, var(--ts-teal-bg), var(--ts-teal-bg-2));
+  border: 1px solid #b9e9e2;
+  border-left: 4px solid var(--ts-teal);
+  border-radius: var(--ts-radius);
+  padding: 16px 18px 16px 22px;
+  margin: 14px 0 20px;
+  box-shadow: var(--ts-shadow);
+  color: #0f4a44;
+  font-size: 14px;
+  line-height: 1.7;
 }
 
-/* FORM CHUNG */
-
-.card,
-.service-card,
-.panel{
-    border:none!important;
-    border-radius:16px!important;
-    overflow:hidden;
-    box-shadow:0 10px 30px rgba(0,0,0,.08)!important;
-    background:#fff;
+.view-user .alert-info::before,
+.view-user div[class*="server-info"]::before,
+.view-user div[class*="package-note"]::before {
+  content: "ℹ";
+  position: absolute;
+  top: 14px;
+  left: -14px;
+  width: 28px;
+  height: 28px;
+  background: var(--ts-teal);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 8px rgba(13, 148, 136, 0.35);
 }
 
-/* KHUNG THÔNG TIN SERVER */
-
-.alert-info,
-.server-description,
-.server-info{
-    background:linear-gradient(135deg,#dff7ff,#f2fdff)!important;
-    border:1px solid #8ee4ff!important;
-    border-left:5px solid var(--primary)!important;
-    border-radius:14px!important;
-    padding:16px 18px!important;
-    color:#334155!important;
-    font-size:14px;
-    line-height:1.7;
-    box-shadow:0 6px 20px rgba(0,0,0,.05);
+.view-user .alert-info b,
+.view-user .alert-info strong {
+  color: #0d6b63;
 }
 
-/* RADIO SERVER */
-
-input[type="radio"]{
-    transform:scale(1.15);
+/* =====================================================================
+   2) DANH SÁCH CHỌN SERVER (bonus – để đồng bộ với khung mô tả ở trên)
+   ===================================================================== */
+.view-user .form-check {
+  border: 1px solid var(--ts-border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  transition: 0.2s ease;
+  background: #fff;
 }
 
-.server-item{
-    padding:14px;
-    border-radius:12px;
-    transition:.3s;
+.view-user .form-check:hover {
+  border-color: var(--ts-teal);
+  box-shadow: 0 2px 10px rgba(13, 148, 136, 0.12);
 }
 
-.server-item:hover{
-    background:#f7f9ff;
+.view-user .form-check-input:checked ~ .form-check-label,
+.view-user .form-check input[type="radio"]:checked + label {
+  color: var(--ts-purple);
+  font-weight: 600;
 }
 
-/* BADGE HOẠT ĐỘNG */
-
-.label-success,
-.badge-success{
-    background:linear-gradient(135deg,#00c17c,#00e599)!important;
-    color:#fff!important;
-    border-radius:8px;
-    padding:4px 10px;
-    font-weight:600;
+.view-user .badge-success,
+.view-user .bg-success,
+.view-user span.badge {
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
 }
 
-/* INPUT */
-
-input,
-textarea,
-select{
-    border-radius:12px!important;
-    border:1px solid #dbe3ee!important;
-    min-height:50px!important;
-    box-shadow:none!important;
-    transition:.3s;
+/* =====================================================================
+   3) KHU VỰC MUA: Số lượng / Giá tiền / Tổng Giá / Ghi chú / nút Mua
+   ===================================================================== */
+.view-user label {
+  font-weight: 600;
+  color: var(--ts-text);
+  font-size: 13px;
+  margin-bottom: 6px;
 }
 
-input:focus,
-textarea:focus,
-select:focus{
-    border-color:var(--primary)!important;
-    box-shadow:0 0 0 4px rgba(88,101,242,.12)!important;
+.view-user input.form-control,
+.view-user textarea.form-control,
+.view-user select.form-control {
+  border: 1.5px solid var(--ts-border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  transition: 0.2s ease;
+  background: #fafafe;
 }
 
-/* LABEL */
-
-label{
-    font-weight:600;
-    color:#334155;
-    margin-bottom:8px;
+.view-user input.form-control:focus,
+.view-user textarea.form-control:focus {
+  border-color: var(--ts-teal);
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.12);
+  background: #fff;
 }
 
-/* KHU VỰC GIÁ */
-
-.price-box{
-    background:#f8fafc;
-    border:1px solid #e2e8f0;
-    border-radius:14px;
-    padding:15px;
+/* Giá tiền & Tổng Giá: làm nổi bật vì đây là số liệu quan trọng nhất */
+.view-user input[name="total"],
+.view-user input[name="totalPrice"],
+.view-user input.total-price,
+.view-user input[id*="total"] {
+  background: var(--ts-purple-light) !important;
+  border-color: #d8cdf2 !important;
+  color: var(--ts-purple) !important;
+  font-weight: 700;
+  font-size: 17px;
 }
 
-.price-box .price{
-    color:#ef4444;
-    font-weight:700;
-    font-size:18px;
+/* Nút Mua */
+.view-user button.btn-success,
+.view-user .btn-success,
+.view-user input[type="submit"].btn-success {
+  background: linear-gradient(135deg, #16a34a, #0d9488);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 28px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  box-shadow: 0 6px 16px rgba(13, 148, 136, 0.3);
+  transition: 0.2s ease;
 }
 
-/* TỔNG GIÁ */
-
-.total-price,
-.order-total{
-    background:linear-gradient(135deg,#5865f2,#7c8cff);
-    color:#fff!important;
-    border-radius:14px;
-    padding:14px;
-    font-size:18px;
-    font-weight:700;
-    text-align:center;
-    box-shadow:0 10px 20px rgba(88,101,242,.25);
+.view-user button.btn-success:hover,
+.view-user .btn-success:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(13, 148, 136, 0.4);
 }
 
-/* NÚT MUA */
-
-.btn-success,
-.btn-primary,
-button[type="submit"]{
-    background:linear-gradient(135deg,#00c17c,#00e599)!important;
-    border:none!important;
-    min-height:52px;
-    padding:0 30px!important;
-    border-radius:12px!important;
-    font-size:16px!important;
-    font-weight:700!important;
-    box-shadow:0 10px 20px rgba(0,193,124,.25);
-    transition:.3s;
+/* Nút Quản Lý ID */
+.view-user .btn-danger,
+.view-user a[class*="quan-ly-id"],
+.view-user button[class*="quan-ly-id"] {
+  background: linear-gradient(135deg, #ec4899, #be185d);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 24px;
+  font-weight: 700;
+  box-shadow: 0 6px 16px rgba(236, 72, 153, 0.3);
+  transition: 0.2s ease;
 }
 
-.btn-success:hover,
-.btn-primary:hover,
-button[type="submit"]:hover{
-    transform:translateY(-2px);
+.view-user .btn-danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(236, 72, 153, 0.4);
 }
 
-/* NÚT QUẢN LÝ ID */
+/* =====================================================================
+   4) TRANG NẠP TIỀN
+   ===================================================================== */
 
-.btn-danger{
-    background:linear-gradient(135deg,#ff4d6d,#ff758f)!important;
-    border:none!important;
-    border-radius:12px!important;
-    font-weight:700!important;
+/* Tabs Banking / Crypto / Thẻ cào / Gift Code */
+.view-user .nav-tabs .nav-link {
+  border: none;
+  border-radius: 10px 10px 0 0;
+  font-weight: 600;
+  color: var(--ts-text-soft);
+  padding: 10px 22px;
 }
 
-/* REACTION ICON */
-
-.reaction-item img,
-.emotion-item img{
-    transition:.3s;
+.view-user .nav-tabs .nav-link.active {
+  color: var(--ts-teal);
+  border-bottom: 3px solid var(--ts-teal);
+  background: var(--ts-teal-bg);
 }
 
-.reaction-item:hover img,
-.emotion-item:hover img{
-    transform:scale(1.15);
+/* Banner "NỘI DUNG CHUYỂN TIỀN" */
+.view-user div[class*="content-title"],
+.view-user .alert-success,
+.view-user .bg-success.text-center {
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  box-shadow: 0 6px 16px rgba(22, 163, 74, 0.25);
 }
 
-/* KHUNG VIDEO */
-
-.video-box iframe,
-iframe{
-    border-radius:16px!important;
-    overflow:hidden;
+/* Khối thông tin chuyển khoản (Tên TK / Số TK / Nội dung) */
+.view-user div[class*="payment-info"],
+.view-user div[class*="bank-info"],
+.view-user .card-body {
+  background: #fff;
+  border: 1px solid var(--ts-border);
+  border-radius: var(--ts-radius);
+  box-shadow: var(--ts-shadow);
+  padding: 22px;
 }
 
-/* GHI CHÚ */
-
-.note-box,
-.notice-box{
-    background:#fffdf6;
-    border-left:4px solid var(--warning);
-    border-radius:12px;
-    padding:15px;
+.view-user div[class*="payment-info"] p,
+.view-user div[class*="bank-info"] p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--ts-border);
+  font-size: 14.5px;
 }
 
-/* ==========================
-   TRANG NẠP TIỀN
-   ========================== */
-
-.deposit-card{
-    background:#fff;
-    border-radius:20px;
-    padding:25px;
-    box-shadow:0 10px 35px rgba(0,0,0,.08);
+/* Khung QR code */
+.view-user img[src*="qr"],
+.view-user div[class*="qr"] {
+  border: 6px solid #fff;
+  border-radius: 12px;
+  box-shadow: var(--ts-shadow);
+  padding: 4px;
 }
 
-.deposit-title{
-    font-size:24px;
-    font-weight:700;
-    color:#0f172a;
+/* Nút copy nhỏ cạnh "Số TK" / "Nội dung" */
+.view-user [class*="copy"],
+.view-user i.fa-copy,
+.view-user i.fa-clone {
+  color: var(--ts-teal);
+  cursor: pointer;
+  transition: 0.15s;
 }
 
-.deposit-content{
-    background:linear-gradient(135deg,#00c17c,#1fd49f);
-    color:#fff;
-    border-radius:14px;
-    padding:16px;
-    text-align:center;
-    font-size:22px;
-    font-weight:700;
+.view-user [class*="copy"]:hover {
+  color: var(--ts-purple);
+  transform: scale(1.15);
 }
 
-.qr-box{
-    background:#fff;
-    border-radius:18px;
-    padding:20px;
-    text-align:center;
-    border:1px solid #eef2f7;
+/* Khung "Lưu ý / Hướng Dẫn Nạp Tiền" */
+.view-user div[class*="huong-dan"],
+.view-user div[class*="note"],
+.view-user div[class*="luu-y"] {
+  background: var(--ts-purple-light);
+  border: 1px solid #e1d9f5;
+  border-radius: var(--ts-radius);
+  padding: 18px 20px;
+  box-shadow: var(--ts-shadow);
 }
 
-.bank-info{
-    padding:20px;
-    border-radius:16px;
-    background:#f8fafc;
+/* Bảng "Ưu Đãi Cấp Bậc" */
+.view-user table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--ts-shadow);
 }
 
-/* BẢNG ƯU ĐÃI */
-
-.table{
-    border-radius:16px;
-    overflow:hidden;
+.view-user table thead th {
+  background: var(--ts-purple);
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 14px;
+  border: none;
 }
 
-.table th{
-    background:#5865f2;
-    color:#fff;
+.view-user table tbody td {
+  padding: 10px 14px;
+  background: #fff;
+  border-bottom: 1px solid var(--ts-border);
 }
 
-/* MOBILE */
+.view-user table tbody tr:hover td {
+  background: var(--ts-purple-light);
+}
 
-@media(max-width:768px){
+/* =====================================================================
+   5) RESPONSIVE — Mobile / Tablet
+   ===================================================================== */
+@media (max-width: 768px) {
+  .view-user .alert-info,
+  .view-user div[class*="server-info"],
+  .view-user div[class*="package-note"] {
+    padding: 14px 14px 14px 20px;
+    font-size: 13.5px;
+  }
 
-    .card,
-    .panel{
-        border-radius:12px!important;
-    }
+  .view-user button.btn-success,
+  .view-user .btn-success,
+  .view-user .btn-danger {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 12px 0;
+  }
 
-    .btn-success,
-    .btn-primary{
-        width:100%;
-    }
+  .view-user div[class*="payment-info"],
+  .view-user div[class*="bank-info"],
+  .view-user .card-body {
+    padding: 16px;
+  }
 
-    .deposit-content{
-        font-size:18px;
-    }
+  .view-user table {
+    font-size: 13px;
+  }
 
-    .total-price{
-        font-size:16px;
-    }
+  .view-user table thead th,
+  .view-user table tbody td {
+    padding: 8px 8px;
+  }
 
-    iframe{
-        height:220px!important;
-    }
+  .view-user img[src*="qr"] {
+    display: block;
+    margin: 0 auto;
+    max-width: 200px;
+  }
+}
 
+@media (max-width: 480px) {
+  .view-user input.form-control,
+  .view-user textarea.form-control {
+    font-size: 13.5px;
+    padding: 9px 12px;
+  }
+
+  .view-user div[class*="payment-info"] p,
+  .view-user div[class*="bank-info"] p {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
 }
