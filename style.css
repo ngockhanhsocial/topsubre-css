@@ -1,353 +1,962 @@
-/* =====================================================================
-   TOPSUBRE.COM — CUSTOM CSS
-   Làm đẹp: (1) Mô tả gói server, (2) Khu vực Mua dịch vụ
-            (Số lượng / Giá tiền / Tổng Giá / nút Mua),
-            (3) Trang Nạp Tiền
-   Dán toàn bộ đoạn này vào ô "Custom CSS" trong phần cấu hình hệ thống.
-   Bọc trong .view-user => CSS chỉ áp dụng cho giao diện người dùng,
-   không ảnh hưởng tới trang Admin.
-   ===================================================================== */
+/* =========================================================================
+   TOPSUBRE.COM — CUSTOM THEME STYLESHEET
+   Áp dụng chung cho cả admin (.view-admin) và user (.view-user)
+   Giữ tông tím chủ đạo của theme, nâng cấp hiện đại: gradient nhẹ,
+   bo góc, đổ bóng mềm, hiệu ứng hover, responsive đầy đủ.
+   ========================================================================= */
 
-.view-user {
-  --ts-purple: #3a1f66;
-  --ts-purple-light: #f4f1fb;
-  --ts-pink: #ec4899;
-  --ts-teal: #0d9488;
-  --ts-teal-bg: #e3f9f6;
-  --ts-teal-bg-2: #d0f3ee;
-  --ts-green: #16a34a;
-  --ts-text: #232336;
-  --ts-text-soft: #6b7280;
-  --ts-border: #e7e3f1;
-  --ts-radius: 14px;
-  --ts-shadow: 0 6px 20px rgba(58, 31, 102, 0.08);
+:root {
+  --tp-primary: #5d3fd3;
+  --tp-primary-dark: #4527a0;
+  --tp-primary-light: #7c5cf0;
+  --tp-accent: #00c9a7;
+  --tp-success: #1dd1a1;
+  --tp-warning: #ffb822;
+  --tp-danger: #fd3995;
+  --tp-bg-soft: #f4f3fb;
+  --tp-text-dark: #2a2a3c;
+  --tp-text-muted: #8a8aa3;
+  --tp-radius: 14px;
+  --tp-radius-sm: 10px;
+  --tp-shadow: 0 4px 18px rgba(93, 63, 211, 0.08);
+  --tp-shadow-hover: 0 10px 28px rgba(93, 63, 211, 0.16);
+  --tp-border: #ebe9f7;
 }
 
-/* =====================================================================
-   1) MÔ TẢ GÓI SERVER (khung màu xanh ngọc hiện ra khi chọn server)
-   Bootstrap thường dùng .alert/.alert-info, hoặc panel này có thể dùng
-   class riêng có chứa "info"/"note"/"detail" — selector dưới đây bắt
-   hết các khả năng phổ biến.
-   ===================================================================== */
-.view-user .alert-info,
-.view-user div[class*="server-info"],
-.view-user div[class*="package-note"],
-.view-user div[class*="server-note"],
-.view-user div[class*="goi-note"] {
-  position: relative;
-  background: linear-gradient(135deg, var(--ts-teal-bg), var(--ts-teal-bg-2));
-  border: 1px solid #b9e9e2;
-  border-left: 4px solid var(--ts-teal);
-  border-radius: var(--ts-radius);
-  padding: 16px 18px 16px 22px;
-  margin: 14px 0 20px;
-  box-shadow: var(--ts-shadow);
-  color: #0f4a44;
-  font-size: 14px;
-  line-height: 1.7;
+body {
+  background-color: var(--tp-bg-soft) !important;
 }
 
-.view-user .alert-info::before,
-.view-user div[class*="server-info"]::before,
-.view-user div[class*="package-note"]::before {
-  content: "ℹ";
-  position: absolute;
-  top: 14px;
-  left: -14px;
-  width: 28px;
-  height: 28px;
-  background: var(--ts-teal);
-  color: #fff;
+/* -------------------------------------------------------------------------
+   1. SIDEBAR / ASIDE MENU
+   ------------------------------------------------------------------------- */
+#kt_aside,
+.kt-aside {
+  background: linear-gradient(180deg, var(--tp-primary-dark) 0%, var(--tp-primary) 100%) !important;
+  box-shadow: 4px 0 20px rgba(69, 39, 160, 0.18);
+}
+
+.kt-aside__brand {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.kt-aside__brand .web-logo {
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  font-size: 19px;
+  color: #ffffff !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.kt-aside__brand-aside-toggler {
+  background: rgba(255, 255, 255, 0.12) !important;
   border-radius: 50%;
-  font-size: 15px;
+  transition: background 0.25s;
+}
+.kt-aside__brand-aside-toggler:hover {
+  background: rgba(255, 255, 255, 0.25) !important;
+}
+
+.kt-menu__section-text {
+  color: rgba(255, 255, 255, 0.55) !important;
   font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 3px 8px rgba(13, 148, 136, 0.35);
+  letter-spacing: 0.8px;
+  font-size: 11px;
 }
 
-.view-user .alert-info b,
-.view-user .alert-info strong {
-  color: #0d6b63;
+.kt-menu__nav > .kt-menu__item > .kt-menu__link {
+  border-radius: var(--tp-radius-sm);
+  margin: 2px 10px;
+  transition: all 0.2s ease;
 }
 
-/* =====================================================================
-   2) DANH SÁCH CHỌN SERVER (bonus – để đồng bộ với khung mô tả ở trên)
-   ===================================================================== */
-.view-user .form-check {
-  border: 1px solid var(--ts-border);
-  border-radius: 10px;
-  padding: 10px 14px;
-  margin-bottom: 8px;
-  transition: 0.2s ease;
-  background: #fff;
+.kt-menu__nav > .kt-menu__item > .kt-menu__link:hover,
+.kt-menu__nav > .kt-menu__item.kt-menu__item--active > .kt-menu__link,
+.kt-menu__nav > .kt-menu__item.kt-menu__item--open > .kt-menu__link {
+  background: rgba(255, 255, 255, 0.14) !important;
+  color: #ffffff !important;
 }
 
-.view-user .form-check:hover {
-  border-color: var(--ts-teal);
-  box-shadow: 0 2px 10px rgba(13, 148, 136, 0.12);
+.kt-menu__link-icon {
+  color: rgba(255, 255, 255, 0.85) !important;
 }
 
-.view-user .form-check-input:checked ~ .form-check-label,
-.view-user .form-check input[type="radio"]:checked + label {
-  color: var(--ts-purple);
-  font-weight: 600;
+.kt-menu__subnav .kt-menu__link {
+  border-radius: 8px;
+  margin: 1px 8px;
+  transition: all 0.2s ease;
+}
+.kt-menu__subnav .kt-menu__link:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  padding-left: 28px !important;
 }
 
-.view-user .badge-success,
-.view-user .bg-success,
-.view-user span.badge {
-  border-radius: 20px;
-  padding: 4px 10px;
-  font-weight: 600;
-  letter-spacing: 0.2px;
+.kt-menu__link-bullet--dot span {
+  background-color: rgba(255, 255, 255, 0.45) !important;
 }
 
-/* =====================================================================
-   3) KHU VỰC MUA: Số lượng / Giá tiền / Tổng Giá / Ghi chú / nút Mua
-   ===================================================================== */
-.view-user label {
-  font-weight: 600;
-  color: var(--ts-text);
-  font-size: 13px;
-  margin-bottom: 6px;
+.kt-menu__item.menu-item-payment > .kt-menu__link {
+  background: linear-gradient(90deg, var(--tp-success), #0fb98c) !important;
+  margin: 8px 10px;
+  border-radius: var(--tp-radius-sm);
+  box-shadow: 0 4px 14px rgba(29, 209, 161, 0.35);
+}
+.kt-menu__item.menu-item-payment > .kt-menu__link .kt-menu__link-text,
+.kt-menu__item.menu-item-payment > .kt-menu__link .kt-menu__link-icon {
+  color: #ffffff !important;
 }
 
-.view-user input.form-control,
-.view-user textarea.form-control,
-.view-user select.form-control {
-  border: 1.5px solid var(--ts-border);
-  border-radius: 10px;
-  padding: 10px 14px;
-  font-size: 14px;
-  transition: 0.2s ease;
-  background: #fafafe;
+.kt-menu__item.menu-item-logout > .kt-menu__link:hover {
+  background: rgba(253, 57, 149, 0.18) !important;
 }
 
-.view-user input.form-control:focus,
-.view-user textarea.form-control:focus {
-  border-color: var(--ts-teal);
-  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.12);
-  background: #fff;
+.highlight {
+  animation: tp-pulse 1.6s infinite;
+}
+@keyframes tp-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
 }
 
-/* Giá tiền & Tổng Giá: làm nổi bật vì đây là số liệu quan trọng nhất */
-.view-user input[name="total"],
-.view-user input[name="totalPrice"],
-.view-user input.total-price,
-.view-user input[id*="total"] {
-  background: var(--ts-purple-light) !important;
-  border-color: #d8cdf2 !important;
-  color: var(--ts-purple) !important;
+/* -------------------------------------------------------------------------
+   2. HEADER / TOPBAR
+   ------------------------------------------------------------------------- */
+#kt_header.menu_header {
+  box-shadow: 0 2px 12px rgba(93, 63, 211, 0.07) !important;
+  border-bottom: 1px solid var(--tp-border);
+}
+
+.service-select-wrapper .form-control,
+#service-select {
+  border-radius: 24px !important;
+  border: 1.5px solid var(--tp-border) !important;
+  padding-left: 16px;
+  font-weight: 500;
+  transition: border-color 0.2s;
+}
+#service-select:focus {
+  border-color: var(--tp-primary) !important;
+  box-shadow: 0 0 0 3px rgba(93, 63, 211, 0.12) !important;
+}
+
+.kt-header__topbar-username {
+  font-weight: 700;
+  color: var(--tp-primary-dark);
+}
+
+.kt-header__topbar-user .kt-media img {
+  border: 2px solid var(--tp-primary-light);
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(93, 63, 211, 0.25);
+}
+
+.kt-user-card {
+  border-radius: var(--tp-radius) var(--tp-radius) 0 0 !important;
+}
+
+.switch label {
+  cursor: pointer;
+}
+
+/* -------------------------------------------------------------------------
+   3. SUBHEADER (Trang Tổng Quan / Thanh Toán title bar)
+   ------------------------------------------------------------------------- */
+#kt_subheader {
+  background: #ffffff;
+  border-bottom: 1px solid var(--tp-border);
+}
+.kt-subheader__title {
+  color: var(--tp-text-dark);
+  font-weight: 700;
+  position: relative;
+  padding-left: 14px;
+}
+.kt-subheader__title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 4px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, var(--tp-primary), var(--tp-accent));
+}
+
+/* -------------------------------------------------------------------------
+   4. PORTLET / CARD CHUNG (kt-portlet, .card)
+   ------------------------------------------------------------------------- */
+.kt-portlet,
+.card {
+  border-radius: var(--tp-radius) !important;
+  border: 1px solid var(--tp-border) !important;
+  box-shadow: var(--tp-shadow) !important;
+  transition: box-shadow 0.25s ease, transform 0.2s ease;
+  overflow: hidden;
+}
+
+.kt-portlet__head {
+  border-bottom: 1px solid var(--tp-border) !important;
+}
+.kt-portlet__head-title {
+  font-weight: 700;
+  color: var(--tp-text-dark);
+}
+
+/* -------------------------------------------------------------------------
+   5. PROFILE WIDGET (Số dư / Tổng nạp tháng / Cấp bậc) — kt-widget--user-profile-3
+   ------------------------------------------------------------------------- */
+.kt-widget--user-profile-3 .kt-widget__top {
+  padding: 18px 4px;
+}
+
+.kt-widget--user-profile-3 .kt-widget__media img {
+  border-radius: 50%;
+  border: 3px solid var(--tp-primary-light);
+  box-shadow: 0 4px 14px rgba(93, 63, 211, 0.25);
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+}
+
+.kt-widget__username {
   font-weight: 700;
   font-size: 17px;
 }
-
-/* Nút Mua */
-.view-user button.btn-success,
-.view-user .btn-success,
-.view-user input[type="submit"].btn-success {
-  background: linear-gradient(135deg, #16a34a, #0d9488);
-  border: none;
-  border-radius: 10px;
-  padding: 10px 28px;
-  font-weight: 700;
-  letter-spacing: 0.3px;
-  box-shadow: 0 6px 16px rgba(13, 148, 136, 0.3);
-  transition: 0.2s ease;
+.kt-widget__username .icon-tick {
+  width: 16px;
+  vertical-align: middle;
 }
 
-.view-user button.btn-success:hover,
-.view-user .btn-success:hover {
+.currency-widget {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.currency-widget .kt-widget__item {
+  flex: 1 1 30%;
+  min-width: 140px;
+  background: var(--tp-bg-soft);
+  border-radius: var(--tp-radius-sm);
+  padding: 14px 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  transition: background 0.2s, transform 0.2s;
+}
+.currency-widget .kt-widget__item:hover {
+  background: #ece9fb;
   transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(13, 148, 136, 0.4);
 }
 
-/* Nút Quản Lý ID */
-.view-user .btn-danger,
-.view-user a[class*="quan-ly-id"],
-.view-user button[class*="quan-ly-id"] {
-  background: linear-gradient(135deg, #ec4899, #be185d);
-  border: none;
-  border-radius: 10px;
-  padding: 10px 24px;
-  font-weight: 700;
-  box-shadow: 0 6px 16px rgba(236, 72, 153, 0.3);
-  transition: 0.2s ease;
+.currency-widget .kt-widget__icon {
+  font-size: 22px;
+  flex-shrink: 0;
 }
 
-.view-user .btn-danger:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(236, 72, 153, 0.4);
-}
-
-/* =====================================================================
-   4) TRANG NẠP TIỀN
-   ===================================================================== */
-
-/* Tabs Banking / Crypto / Thẻ cào / Gift Code */
-.view-user .nav-tabs .nav-link {
-  border: none;
-  border-radius: 10px 10px 0 0;
+.currency-widget .kt-widget__title {
+  display: block;
+  font-size: 12px;
+  color: var(--tp-text-muted);
   font-weight: 600;
-  color: var(--ts-text-soft);
-  padding: 10px 22px;
-}
-
-.view-user .nav-tabs .nav-link.active {
-  color: var(--ts-teal);
-  border-bottom: 3px solid var(--ts-teal);
-  background: var(--ts-teal-bg);
-}
-
-/* Banner "NỘI DUNG CHUYỂN TIỀN" */
-.view-user div[class*="content-title"],
-.view-user .alert-success,
-.view-user .bg-success.text-center {
-  background: linear-gradient(135deg, #16a34a, #15803d);
-  border-radius: 10px;
-  padding: 12px 18px;
-  font-weight: 700;
+  margin-bottom: 2px;
+  text-transform: uppercase;
   letter-spacing: 0.3px;
-  box-shadow: 0 6px 16px rgba(22, 163, 74, 0.25);
 }
 
-/* Khối thông tin chuyển khoản (Tên TK / Số TK / Nội dung) */
-.view-user div[class*="payment-info"],
-.view-user div[class*="bank-info"],
-.view-user .card-body {
-  background: #fff;
-  border: 1px solid var(--ts-border);
-  border-radius: var(--ts-radius);
-  box-shadow: var(--ts-shadow);
-  padding: 22px;
+.money-value {
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--tp-text-dark);
 }
 
-.view-user div[class*="payment-info"] p,
-.view-user div[class*="bank-info"] p {
+.currency-unit.tomato {
+  color: var(--tp-primary) !important;
+  font-weight: 700;
+}
+
+.currency-dropdown .dropdown-toggle {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.kt-widget__details .progress {
+  background-color: #e3e0f7 !important;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 6px;
+}
+.kt-widget__details .progress-bar {
+  background: linear-gradient(90deg, var(--tp-primary), var(--tp-accent)) !important;
+}
+
+/* -------------------------------------------------------------------------
+   6. INFO BOX (thông báo liên kết Telegram) + FEED (bài đăng Quản Trị Viên)
+   ------------------------------------------------------------------------- */
+.info-box {
+  border-radius: var(--tp-radius) !important;
+  box-shadow: var(--tp-shadow) !important;
+  border-left: 4px solid var(--tp-warning);
+}
+
+.telegram-button {
+  border-radius: 20px !important;
+  background: linear-gradient(90deg, #0088cc, #00a6e8) !important;
+  box-shadow: 0 3px 10px rgba(0, 136, 204, 0.35);
+}
+.telegram-button:hover {
+  background: linear-gradient(90deg, #006da8, #0088cc) !important;
+}
+
+.feed-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  margin-right: 10px;
+  box-shadow: 0 2px 8px rgba(93, 63, 211, 0.18);
+}
+
+.feed-title {
+  font-weight: 700;
+  color: var(--tp-primary-dark);
+}
+
+.feed-time {
+  font-size: 12px;
+  color: var(--tp-text-muted);
+}
+
+.feed-content {
+  margin-top: 8px;
+  line-height: 1.6;
+  color: var(--tp-text-dark);
+}
+
+.feed-image img {
+  border-radius: var(--tp-radius-sm);
+  margin-top: 10px;
+  cursor: zoom-in;
+  transition: opacity 0.2s;
+}
+.feed-image img:hover {
+  opacity: 0.92;
+}
+
+/* -------------------------------------------------------------------------
+   7. NOTIFICATIONS LIST (Hoạt động mới)
+   ------------------------------------------------------------------------- */
+.list-user-notifications table#table-notifications {
+  width: 100%;
+}
+.list-user-notifications .notify-item {
+  display: flex;
+  gap: 8px;
+  padding: 9px 6px;
+  border-bottom: 1px dashed var(--tp-border);
+  font-size: 13.5px;
+}
+.list-user-notifications .notify-item.new .content {
+  font-weight: 700;
+}
+.notify-item .text-money {
+  color: var(--tp-success);
+  font-weight: 700;
+}
+.badge-new {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--tp-danger);
+  margin-left: 6px;
+}
+
+.btn-view-notify {
+  border-radius: 22px !important;
+  background: var(--tp-bg-soft);
+  border: 1px solid var(--tp-border);
+  color: var(--tp-primary-dark);
+  font-weight: 600;
+  padding: 8px 22px;
+  transition: all 0.2s;
+}
+.btn-view-notify:hover {
+  background: var(--tp-primary);
+  color: #fff;
+}
+
+/* -------------------------------------------------------------------------
+   8. FAQ ACCORDION (.question)
+   ------------------------------------------------------------------------- */
+.question {
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: var(--tp-radius-sm);
+  background: var(--tp-bg-soft);
+  font-weight: 600;
+  color: var(--tp-text-dark);
+  transition: background 0.2s;
+}
+.question:hover {
+  background: #ece9fb;
+}
+.question i {
+  color: var(--tp-primary);
+  margin-right: 6px;
+}
+.question + .collapse .card {
+  border: none !important;
+  box-shadow: none !important;
+  background: #fbfaff;
+  border-radius: 0 0 var(--tp-radius-sm) var(--tp-radius-sm) !important;
+}
+
+/* -------------------------------------------------------------------------
+   9. WIDGET SUPPORT (Bạn cần hỗ trợ?)
+   ------------------------------------------------------------------------- */
+.widget-support {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 0;
-  border-bottom: 1px dashed var(--ts-border);
+  gap: 10px;
+  padding: 12px;
+  border-radius: var(--tp-radius-sm);
+  background: var(--tp-bg-soft);
+  text-decoration: none;
+  transition: all 0.25s;
+}
+.widget-support:hover {
+  background: linear-gradient(90deg, var(--tp-primary-light), var(--tp-primary));
+  transform: translateY(-2px);
+  box-shadow: var(--tp-shadow-hover);
+}
+.widget-support img {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.widget-support .support-text {
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--tp-text-dark);
+}
+.widget-support:hover .support-text {
+  color: #ffffff;
+}
+
+/* =========================================================================
+   10. TRANG DỊCH VỤ (FB Speed, v.v.) — Mua dịch vụ / Khung mô tả server
+   ========================================================================= */
+
+/* --- Khung mô tả server màu xanh nhạt (ID / mô tả / tối thiểu - tối đa) --- */
+.server-info,
+.alert-info,
+.bg-light-info,
+[class*="server-desc"] {
+  border-radius: var(--tp-radius-sm) !important;
+}
+
+/* Vì theme dùng inline style/markup linh hoạt cho khung mô tả server,
+   ta target theo cấu trúc phổ biến: div ngay sau radio input server,
+   hoặc div có class chứa "info" / "note" nằm trong form mua dịch vụ. */
+.kt-portlet__body .form-group + div[style*="background"],
+.server-note,
+.note-server {
+  background: linear-gradient(135deg, #eafaf6, #e3f6ff) !important;
+  border: 1px solid #c9ecf5;
+  border-radius: var(--tp-radius-sm) !important;
+  padding: 14px 16px !important;
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #1c5c52;
+}
+
+/* Radio chọn server */
+.custom-radio,
+.form-check {
+  border-radius: var(--tp-radius-sm);
+  padding: 8px 4px;
+  transition: background 0.2s;
+}
+.form-check:hover,
+.custom-radio:hover {
+  background: var(--tp-bg-soft);
+}
+
+input[type="radio"] {
+  accent-color: var(--tp-primary);
+  width: 16px;
+  height: 16px;
+}
+
+/* Badge trạng thái server: Hoạt động / Chậm / Bảo trì / Ngừng nhận đơn */
+.badge,
+.label,
+.status-badge {
+  border-radius: 20px !important;
+  font-weight: 600 !important;
+  padding: 4px 12px !important;
+  font-size: 11.5px !important;
+  letter-spacing: 0.3px;
+}
+.badge-success,
+.label-success,
+.text-success.badge {
+  background: linear-gradient(90deg, #1dd1a1, #0fb98c) !important;
+  color: #fff !important;
+}
+.badge-danger,
+.label-danger {
+  background: linear-gradient(90deg, #fd3995, #e91e63) !important;
+  color: #fff !important;
+}
+.badge-warning,
+.label-warning {
+  background: linear-gradient(90deg, #ffb822, #ff9800) !important;
+  color: #fff !important;
+}
+
+/* --- Form mua dịch vụ: input số lượng / giá tiền / tổng giá / ghi chú --- */
+.form-group label {
+  font-weight: 600;
+  color: var(--tp-text-dark);
+  font-size: 13.5px;
+  margin-bottom: 6px;
+}
+
+.form-control {
+  border-radius: var(--tp-radius-sm) !important;
+  border: 1.5px solid var(--tp-border) !important;
+  padding: 10px 14px !important;
   font-size: 14.5px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-control:focus {
+  border-color: var(--tp-primary) !important;
+  box-shadow: 0 0 0 3px rgba(93, 63, 211, 0.12) !important;
+}
+.form-control[readonly],
+.form-control:disabled {
+  background-color: var(--tp-bg-soft) !important;
+  font-weight: 700;
+  color: var(--tp-primary-dark);
 }
 
-/* Khung QR code */
-.view-user img[src*="qr"],
-.view-user div[class*="qr"] {
-  border: 6px solid #fff;
-  border-radius: 12px;
-  box-shadow: var(--ts-shadow);
-  padding: 4px;
+textarea.form-control {
+  border-radius: var(--tp-radius-sm) !important;
 }
 
-/* Nút copy nhỏ cạnh "Số TK" / "Nội dung" */
-.view-user [class*="copy"],
-.view-user i.fa-copy,
-.view-user i.fa-clone {
-  color: var(--ts-teal);
+/* Emoji cảm xúc chọn (Facebook reactions) */
+.emoji-select,
+.reaction-icons img,
+.reaction-icons span {
+  border-radius: 50%;
+  transition: transform 0.2s;
   cursor: pointer;
-  transition: 0.15s;
 }
-
-.view-user [class*="copy"]:hover {
-  color: var(--ts-purple);
+.emoji-select:hover,
+.reaction-icons img:hover {
   transform: scale(1.15);
 }
 
-/* Khung "Lưu ý / Hướng Dẫn Nạp Tiền" */
-.view-user div[class*="huong-dan"],
-.view-user div[class*="note"],
-.view-user div[class*="luu-y"] {
-  background: var(--ts-purple-light);
-  border: 1px solid #e1d9f5;
-  border-radius: var(--ts-radius);
-  padding: 18px 20px;
-  box-shadow: var(--ts-shadow);
+/* Nút Mua / Quản Lý ID */
+.btn {
+  border-radius: 24px !important;
+  font-weight: 700 !important;
+  padding: 10px 26px !important;
+  letter-spacing: 0.2px;
+  transition: all 0.22s ease;
+  border: none !important;
+}
+.btn:active {
+  transform: scale(0.97);
 }
 
-/* Bảng "Ưu Đãi Cấp Bậc" */
-.view-user table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  border-radius: 10px;
+.btn-success {
+  background: linear-gradient(90deg, #1dd1a1, #0fb98c) !important;
+  box-shadow: 0 4px 14px rgba(29, 209, 161, 0.35);
+}
+.btn-success:hover {
+  box-shadow: 0 6px 20px rgba(29, 209, 161, 0.45);
+  transform: translateY(-1px);
+}
+
+.btn-danger,
+.btn-quan-ly-id {
+  background: linear-gradient(90deg, #fd3995, #e91e63) !important;
+  box-shadow: 0 4px 14px rgba(253, 57, 149, 0.3);
+}
+.btn-danger:hover {
+  box-shadow: 0 6px 20px rgba(253, 57, 149, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, var(--tp-primary), var(--tp-primary-light)) !important;
+  box-shadow: 0 4px 14px rgba(93, 63, 211, 0.3);
+}
+.btn-primary:hover {
+  box-shadow: 0 6px 20px rgba(93, 63, 211, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: #f1f0f8 !important;
+  color: var(--tp-text-dark) !important;
+}
+
+/* Toggle "Mua nhiều đơn cùng lúc" */
+.custom-control-input:checked ~ .custom-control-label::before,
+.switch input:checked + label,
+input[type="checkbox"].toggle-switch:checked + label {
+  background-color: var(--tp-primary) !important;
+}
+
+/* --- Khung "Video hướng dẫn" --- */
+.video-container {
+  border-radius: var(--tp-radius-sm);
   overflow: hidden;
-  box-shadow: var(--ts-shadow);
+  box-shadow: var(--tp-shadow);
+}
+.video-container iframe {
+  width: 100% !important;
+  border-radius: var(--tp-radius-sm);
 }
 
-.view-user table thead th {
-  background: var(--ts-purple);
-  color: #fff;
+/* --- Khung "Lưu ý" bên phải trang dịch vụ --- */
+.note-box,
+.kt-portlet .kt-portlet__head-title:contains("Lưu") {
+  /* fallback chỉ áp dụng cho phần tử có class rõ ràng phía dưới */
+}
+.kt-portlet__head-title,
+h3.kt-portlet__head-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* =========================================================================
+   11. TRANG NẠP TIỀN (payment)
+   ========================================================================= */
+
+/* --- Tab chọn phương thức: Banking / Crypto / Thẻ cào / Gift Code --- */
+.payment-widget {
+  border: 1.5px solid var(--tp-border) !important;
+  border-radius: var(--tp-radius-sm) !important;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+}
+.payment-widget .icon {
+  color: var(--tp-text-muted);
+  transition: color 0.25s;
+}
+.payment-widget .text {
   font-weight: 600;
-  padding: 10px 14px;
-  border: none;
+  color: var(--tp-text-dark);
+  transition: color 0.25s;
+}
+.payment-widget:hover {
+  border-color: var(--tp-primary-light) !important;
+  box-shadow: var(--tp-shadow);
+  transform: translateY(-2px);
+}
+.payment-widget.active {
+  border-color: var(--tp-success) !important;
+  background: linear-gradient(135deg, #effdf8, #e8fbf3) !important;
+  box-shadow: 0 4px 16px rgba(29, 209, 161, 0.18);
+}
+.payment-widget.active .icon,
+.payment-widget.active .text {
+  color: var(--tp-success) !important;
 }
 
-.view-user table tbody td {
-  padding: 10px 14px;
+/* --- Khung "Nội dung chuyển tiền" --- */
+.text-intro-payment {
+  color: var(--tp-text-dark) !important;
+  font-weight: 800 !important;
+}
+
+.payment-content.alert.alert-success {
+  background: linear-gradient(90deg, #effdf8, #e3f9f0) !important;
+  border: 1.5px dashed var(--tp-success) !important;
+  border-radius: var(--tp-radius-sm) !important;
+  color: #0e7c5c !important;
+  padding: 14px 18px !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-copy {
+  color: var(--tp-primary);
+  font-size: 1.05em;
+}
+.btn-copy:hover {
+  color: var(--tp-primary-dark);
+}
+
+/* --- Tab chọn ngân hàng (logo) --- */
+.list-banks {
+  border-bottom: none !important;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.list-banks .nav-item {
+  margin-bottom: 6px;
+}
+.list-banks .nav-link {
+  border: 1.5px solid var(--tp-border) !important;
+  border-radius: var(--tp-radius-sm) !important;
   background: #fff;
-  border-bottom: 1px solid var(--ts-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.22s;
+}
+.list-banks .nav-link.active {
+  border-color: var(--tp-primary) !important;
+  background: linear-gradient(135deg, #f1edfd, #e9e4fb) !important;
+  box-shadow: 0 3px 10px rgba(93, 63, 211, 0.15);
+}
+.list-banks .nav-link:hover {
+  border-color: var(--tp-primary-light) !important;
 }
 
-.view-user table tbody tr:hover td {
-  background: var(--ts-purple-light);
+.list-banks + .tab-content .tab-pane {
+  padding-top: 18px;
 }
 
-/* =====================================================================
-   5) RESPONSIVE — Mobile / Tablet
-   ===================================================================== */
+/* --- Bảng thông tin chuyển khoản (Tên TK / Số TK / Nội dung) --- */
+.table-payment-info td {
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
+.table-payment-info td:first-child {
+  color: var(--tp-text-muted);
+  font-weight: 600;
+  font-size: 14px !important;
+  width: 110px;
+}
+.table-payment-info td:last-child {
+  font-weight: 700;
+  color: var(--tp-text-dark);
+}
+.table-payment-info .fa-copy {
+  color: var(--tp-success) !important;
+  margin-left: 6px;
+  cursor: pointer;
+}
+
+/* --- Mã QR --- */
+.qr-code,
+.qr-container img {
+  border-radius: var(--tp-radius-sm);
+  border: 6px solid #ffffff;
+  box-shadow: 0 6px 22px rgba(93, 63, 211, 0.16);
+}
+
+.qr-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* --- Khung "Ghi Chú" / Hướng dẫn nạp tiền (payment-note) --- */
+.payment-note {
+  font-size: 14.5px;
+  line-height: 1.65;
+}
+.payment-note h2 {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--tp-primary-dark);
+}
+.payment-note h3 {
+  font-size: 16.5px;
+  font-weight: 800;
+  color: var(--tp-text-dark);
+  margin-top: 4px;
+}
+
+/* Khung cảnh báo "LƯU Ý QUAN TRỌNG" trong ghi chú nạp tiền */
+.payment-note div[style*="background:#fff5f5"],
+.payment-note div[style*="background: #fff5f5"] {
+  border-radius: var(--tp-radius-sm) !important;
+  box-shadow: 0 2px 10px rgba(231, 76, 60, 0.1);
+}
+
+/* Bảng "Ưu Đãi Cấp Bậc" trong ghi chú */
+.payment-note table {
+  width: 100% !important;
+  border-collapse: separate !important;
+  border-spacing: 0;
+  border-radius: var(--tp-radius-sm);
+  overflow: hidden;
+  box-shadow: var(--tp-shadow);
+}
+.payment-note table tr:first-child td {
+  background: linear-gradient(90deg, var(--tp-primary), var(--tp-primary-light)) !important;
+  color: #ffffff !important;
+  border: none !important;
+  font-weight: 700 !important;
+}
+.payment-note table tr:not(:first-child) td {
+  border: none !important;
+  border-bottom: 1px solid var(--tp-border) !important;
+  background: #ffffff;
+}
+.payment-note table tr:not(:first-child):hover td {
+  background: var(--tp-bg-soft);
+}
+.payment-note table tr:last-child td {
+  border-bottom: none !important;
+}
+
+/* Nút "LIÊN HỆ QUA ZALO NGAY" trong ghi chú */
+.payment-note a[style*="background"] {
+  border-radius: 24px !important;
+  box-shadow: 0 4px 14px rgba(0, 132, 255, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.payment-note a[style*="background"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 132, 255, 0.4);
+}
+
+/* --- Thống kê nạp / chi --- */
+.widget-date-range .form-control {
+  width: auto;
+  display: inline-block;
+}
+#value_in,
+#value_out {
+  font-weight: 800;
+  font-size: 1.1em;
+}
+
+/* --- Crypto / Thẻ cào / Gift Code panels --- */
+.crypto-payment-title {
+  color: var(--tp-primary-dark);
+  font-size: 15.5px !important;
+}
+
+.alert.alert-card {
+  background: linear-gradient(135deg, #effdf8, #e8fbf3) !important;
+  border: 1px solid #b6f0d8 !important;
+  border-radius: var(--tp-radius) !important;
+}
+.alert-card i.fa {
+  color: var(--tp-success) !important;
+}
+
+.offer-intro {
+  color: var(--tp-text-dark);
+  font-weight: 600;
+}
+
+.widget-offer .input-group .form-control {
+  border-radius: var(--tp-radius-sm) 0 0 var(--tp-radius-sm) !important;
+}
+.widget-offer .input-group-append .btn {
+  border-radius: 0 var(--tp-radius-sm) var(--tp-radius-sm) 0 !important;
+}
+
+/* --- Datatable nạp tiền / phiếu nạp / thẻ cào --- */
+table.dataTable,
+.table-bordered {
+  border-radius: var(--tp-radius-sm);
+  overflow: hidden;
+}
+table.dataTable thead th {
+  background: var(--tp-bg-soft) !important;
+  color: var(--tp-text-dark) !important;
+  font-weight: 700 !important;
+  border-bottom: 2px solid var(--tp-border) !important;
+}
+table.dataTable tbody tr:hover {
+  background: #faf9ff !important;
+}
+
+/* =========================================================================
+   12. RESPONSIVE — MOBILE
+   ========================================================================= */
+@media (max-width: 991px) {
+  .currency-widget .kt-widget__item {
+    flex: 1 1 45%;
+  }
+}
+
 @media (max-width: 768px) {
-  .view-user .alert-info,
-  .view-user div[class*="server-info"],
-  .view-user div[class*="package-note"] {
-    padding: 14px 14px 14px 20px;
-    font-size: 13.5px;
+  .kt-portlet,
+  .card {
+    border-radius: 12px !important;
   }
 
-  .view-user button.btn-success,
-  .view-user .btn-success,
-  .view-user .btn-danger {
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 12px 0;
+  .currency-widget {
+    flex-direction: column;
+  }
+  .currency-widget .kt-widget__item {
+    flex: 1 1 100%;
   }
 
-  .view-user div[class*="payment-info"],
-  .view-user div[class*="bank-info"],
-  .view-user .card-body {
-    padding: 16px;
+  .payment-widget {
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
   }
-
-  .view-user table {
+  .payment-widget .icon {
+    font-size: 17px;
+  }
+  .payment-widget .text {
     font-size: 13px;
   }
 
-  .view-user table thead th,
-  .view-user table tbody td {
-    padding: 8px 8px;
+  .list-banks .nav-link img {
+    max-height: 26px;
+    max-width: 70px;
   }
 
-  .view-user img[src*="qr"] {
-    display: block;
-    margin: 0 auto;
-    max-width: 200px;
+  .table-payment-info td {
+    font-size: 14px !important;
+  }
+
+  .qr-code,
+  .qr-container img {
+    border-width: 4px;
+  }
+
+  .btn {
+    padding: 9px 20px !important;
+    font-size: 13.5px;
+  }
+
+  .widget-support {
+    padding: 10px;
+  }
+  .widget-support img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .kt-widget--user-profile-3 .kt-widget__media img {
+    width: 52px;
+    height: 52px;
   }
 }
 
 @media (max-width: 480px) {
-  .view-user input.form-control,
-  .view-user textarea.form-control {
-    font-size: 13.5px;
-    padding: 9px 12px;
+  .payment-note h2 {
+    font-size: 16px;
   }
-
-  .view-user div[class*="payment-info"] p,
-  .view-user div[class*="bank-info"] p {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
+  .payment-note table {
+    font-size: 12.5px !important;
+  }
+  .form-control {
+    font-size: 13.5px;
   }
 }
