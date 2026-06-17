@@ -452,28 +452,57 @@ body {
    10. TRANG DỊCH VỤ (FB Speed, v.v.) — Mua dịch vụ / Khung mô tả server
    ========================================================================= */
 
-/* --- Khung mô tả server màu xanh nhạt (ID / mô tả / tối thiểu - tối đa) --- */
-.server-info,
-.alert-info,
-.bg-light-info,
-[class*="server-desc"] {
+/* --- Khung mô tả server (.server-info) — dùng chung cho MỌI dịch vụ/server --- */
+.server-info.server-section {
+  display: block;
+  background: linear-gradient(135deg, #eafaf6 0%, #e3f6ff 100%) !important;
+  border: 1px solid #c9ecf5;
+  border-left: 4px solid var(--tp-success);
   border-radius: var(--tp-radius-sm) !important;
+  padding: 14px 18px !important;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  font-size: 14px;
+  line-height: 1.75;
+  color: #1c5c52;
+  box-shadow: 0 2px 10px rgba(29, 209, 161, 0.08);
+  animation: tp-fade-in 0.25s ease;
 }
 
-/* Vì theme dùng inline style/markup linh hoạt cho khung mô tả server,
-   ta target theo cấu trúc phổ biến: div ngay sau radio input server,
-   hoặc div có class chứa "info" / "note" nằm trong form mua dịch vụ. */
-.kt-portlet__body .form-group + div[style*="background"],
-.server-note,
-.note-server {
-  background: linear-gradient(135deg, #eafaf6, #e3f6ff) !important;
-  border: 1px solid #c9ecf5;
-  border-radius: var(--tp-radius-sm) !important;
-  padding: 14px 16px !important;
-  margin-top: 10px;
-  font-size: 14px;
-  line-height: 1.6;
-  color: #1c5c52;
+@keyframes tp-fade-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Dòng ID server — làm nổi bật, tự động sinh ra cho từng server */
+.server-info .server-id {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 800;
+  font-size: 14.5px;
+  color: #0e7c5c;
+  background: rgba(255, 255, 255, 0.65);
+  border-radius: 8px;
+  padding: 3px 12px;
+  margin-bottom: 6px;
+  letter-spacing: 0.2px;
+}
+.server-info .server-id span {
+  color: var(--tp-primary-dark);
+  font-weight: 800;
+}
+
+/* Dòng Tối thiểu/Tối đa — tách biệt rõ, nhấn nhẹ */
+.server-info .text-max {
+  display: inline-block;
+  margin-top: 6px;
+  font-weight: 700;
+  font-size: 13px;
+  color: #b8860b;
+  background: #fff8e6;
+  border-radius: 6px;
+  padding: 2px 10px;
 }
 
 /* Radio chọn server */
